@@ -1,0 +1,157 @@
+# Conceitos — Dia 01
+
+> Referência rápida das peças da linguagem usadas no desafio de hoje.  
+> Sempre que travar, volte aqui antes de ir no Google.
+
+---
+
+## 1. Variável — `senha`
+
+Uma variável é um **nome que guarda um valor na memória**. Pense como uma caixinha com etiqueta.
+
+```python
+senha = "Abc@1234"
+#  ↑        ↑
+# etiqueta  conteúdo guardado dentro
+```
+
+Você escolhe o nome (`senha`), e Python guarda o valor. A partir daí, toda vez que você escrever `senha` no código, Python busca o que está dentro dessa caixinha.
+
+O `=` aqui **não é "igual" matemático** — é uma **atribuição**. Leia como:
+> *"guarda o valor da direita dentro do nome da esquerda"*
+
+---
+
+## 2. `input()` — Função de entrada
+
+```python
+senha = input("Digite uma senha: ")
+```
+
+`input()` **pausa o programa e espera o usuário digitar algo**. O que ele digitar vira uma string (texto) e é guardado na variável `senha`.
+
+O texto dentro dos parênteses (`"Digite uma senha: "`) é só a mensagem que aparece na tela para o usuário saber o que fazer. É opcional — você pode remover e o programa ainda funciona, só não vai mostrar nada.
+
+---
+
+## 3. `if / else` — Condição
+
+```python
+if len(senha) >= 8:
+    print("Tamanho OK")
+else:
+    print("Senha muito curta")
+```
+
+`if` é uma **tomada de decisão**. Leia em português direto:
+
+```
+SE o comprimento da senha for maior ou igual a 8:
+    faça isso
+SENÃO:
+    faça aquilo
+```
+
+**Atenção à indentação:** as linhas dentro do `if` precisam ter 4 espaços de recuo. Python usa isso para saber o que pertence ao bloco. Se errar o espaçamento, dá erro.
+
+### Operadores de comparação
+
+| Operador | Significado |
+|----------|-------------|
+| `==` | igual a |
+| `!=` | diferente de |
+| `>=` | maior ou igual |
+| `<=` | menor ou igual |
+| `>` | maior que |
+| `<` | menor que |
+
+---
+
+## 4. `len()` — Contar caracteres
+
+```python
+len("Abc@1234")   # retorna 8
+len("abc")        # retorna 3
+len("")            # retorna 0
+```
+
+`len` é uma **função nativa do Python** que conta a quantidade de itens dentro de algo. No caso de texto, ela conta os caracteres — cada letra, número, espaço ou símbolo conta como 1.
+
+```
+s  e  n  h  a  @  1  2
+1  2  3  4  5  6  7  8   → len retorna 8
+```
+
+---
+
+## 5. `print()` — Função de saída
+
+```python
+print("Tamanho OK")
+```
+
+`print()` **exibe algo na tela**. É a função mais usada para ver o resultado do seu script.
+
+`print` **não é variável nem condição** — é uma **função**. Funções são ações que o Python executa quando você as chama pelo nome seguido de `()`. Tudo que você colocar dentro dos parênteses é o que ela vai usar para trabalhar.
+
+---
+
+## 6. `any()` + `for` — Verificação em coleção
+
+```python
+any(c.isupper() for c in senha)
+```
+
+Leia assim:
+```
+Para cada caractere c dentro de senha,
+  verifica se c é maiúsculo.
+Se QUALQUER UM for maiúsculo, retorna True.
+```
+
+`any()` retorna `True` se pelo menos um item satisfaz a condição. É o equivalente de perguntar: *"existe algum?"*
+
+### Métodos de string
+
+| Método | O que verifica | Exemplo |
+|--------|---------------|---------|
+| `.isupper()` | é letra maiúscula? | `"A".isupper()` → `True` |
+| `.islower()` | é letra minúscula? | `"a".islower()` → `True` |
+| `.isdigit()` | é número? | `"3".isdigit()` → `True` |
+| `c in "!@#$"` | está nessa lista? | `"@" in "!@#$"` → `True` |
+
+---
+
+## 7. A lógica do algoritmo inteiro
+
+Em palavras, o que o script faz:
+
+```
+1. Pedir que o usuário digite uma senha
+2. Verificar 5 critérios um por um:
+      → tem 8+ caracteres?
+      → tem letra maiúscula?
+      → tem letra minúscula?
+      → tem número?
+      → tem caractere especial?
+3. Para cada critério: imprimir true ou false
+4. Contar quantos critérios passaram
+5. Se todos passaram → FORTE. Senão → FRACA.
+```
+
+O fluxo em pseudocódigo:
+
+```
+senha ← input do usuário
+
+criterios_ok ← 0
+
+SE tamanho >= 8        → criterios_ok + 1
+SE tem maiúscula       → criterios_ok + 1
+SE tem minúscula       → criterios_ok + 1
+SE tem número          → criterios_ok + 1
+SE tem especial        → criterios_ok + 1
+
+SE criterios_ok == 5   → imprimir FORTE
+SENÃO                  → imprimir FRACA
+```
